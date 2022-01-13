@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ConfigObject, InitialConfig } from "./Recruitment.types";
 import { Timers, Names } from "./buildings.data";
 import moment, { Moment } from "moment";
+import { Input } from "../../atoms/Input/Input";
 function TypeOfBuilding(unitName: string) {
   switch (unitName) {
     case "spear":
@@ -34,7 +35,7 @@ export default function Recruitment() {
       <Row>
         <Col>
           <span>Select World</span>
-          <input
+          <Input
             type="number"
             value={world}
             onChange={(event) => {
