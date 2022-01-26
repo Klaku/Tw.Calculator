@@ -1,16 +1,15 @@
-import { ObjectId } from 'mongodb';
-import { IStatsSnapshot } from '../interfaces/stats.interface';
+import { IWorldSnapshot } from '../interfaces/world.interface';
 import { UsingMongo } from './mongo.client';
 
-const collection = (id: string, snapshot?: boolean) => `${id}_tribes${snapshot ? '_history' : ''}`;
+const collection = () => `worlds`;
 
 //#region Insert
-export const InsertSnapshot = async (world_id: string, snapshots: IStatsSnapshot[]): Promise<void> => {
+export const Insert = async (world: IWorldSnapshot[]): Promise<void> => {
 	await UsingMongo(async (db) => {
-		for (let index = 0; index < snapshots.length; index++) {
+		for (let index = 0; index < world.length; index++) {
 			try {
-				await db.collection(collection(world_id, true)).insertOne({
-					...snapshots[index],
+				await db.collection(collection()).insertOne({
+					...world[index]
 				});
 			} catch (exception) {
 				console.error(exception);
