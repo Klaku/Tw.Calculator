@@ -1,0 +1,15 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Tw.Extension",
+        "version": "1.0"
+    },
+    "servers": [{ "url": "http://localhost:8888" }],
+    "paths": {
+        "/api/world": {
+            "summary": "Summary",
+            "description": "Returns list of worlds",
+            "servers": [{ "url": "http://localhost:8888" }]
+        }
+    }
+}
