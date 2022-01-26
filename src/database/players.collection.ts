@@ -1,17 +1,17 @@
 import { ObjectId } from 'mongodb';
-import { IdtoVillage, IdtoVillageSnapshot } from '../interfaces/village.interface';
+import { IdtoPlayer, IdtoPlayerSnapshot } from '../interfaces/player.interface';
 import { UsingMongo } from './mongo.client';
 
-const collection = (id: string, snapshot?: boolean) => `${id}_villages${snapshot ? '_history' : ''}`;
+const collection = (id: string, snapshot?: boolean) => `${id}_players${snapshot ? '_history' : ''}`;
 
 //#region Insert
-export const Insert = async (world_id: string, villages: IdtoVillage[]): Promise<void> => {
+export const Insert = async (world_id: string, players: IdtoPlayer[]): Promise<void> => {
 	await UsingMongo(async (db) => {
-		for (let index = 0; index < villages.length; index++) {
+		for (let index = 0; index < players.length; index++) {
 			try {
 				await db.collection(collection(world_id)).insertOne({
-					...villages[index],
-					_id: new ObjectId(villages[index]._id),
+					...players[index],
+					_id: new ObjectId(players[index]._id),
 				});
 			} catch (exception) {
 				console.error(exception);
@@ -20,7 +20,7 @@ export const Insert = async (world_id: string, villages: IdtoVillage[]): Promise
 	});
 };
 
-export const InsertSnapshot = async (world_id: string, snapshots: IdtoVillageSnapshot[]): Promise<void> => {
+export const InsertSnapshot = async (world_id: string, snapshots: IdtoPlayerSnapshot[]): Promise<void> => {
 	await UsingMongo(async (db) => {
 		for (let index = 0; index < snapshots.length; index++) {
 			try {
